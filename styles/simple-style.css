@@ -5,9 +5,10 @@ html {
 body {
     background-color: black;
     height: 100%;
+    overflow: auto;
 }
 
-.horizentally-centered {
+.horizontally-centered {
     float: none;
     margin:auto;
 }
@@ -20,33 +21,33 @@ body {
 
 .header-div {
     height: 10%;
-    background-color: #5e5e5e;
-    /*border-bottom: 3px solid red;*/
-    /*border-top-left-radius: 30px;*/
-    /*border-top-right-radius: 30px;*/
-    /*margin-top: 0.2%;*/
+    background-color: #76323F;
+    vertical-align: middle;
+    border-bottom-left-radius: 10px;
 }
 /* main-div includes second row in the page (which consists of upload drag'n drop box + explanation box*/
 .main-div {
-    height: 60%;
+    background-color: #d7cec7;
+    height: 65%;
 }
 
 .explanation-box {
-    background-color: darksalmon;
+    background-color: #565656;
     border-radius: 10px;
+    border-top-left-radius: 0px;
     height: 100%;
 }
 
 .upload-box {
-    background-color: #2e6da4;
+    background-color: #D7CEc7;
     border-radius: 10px;
     height: 100%;
 }
 
 .selection-menu {
-    background-color: #c7254e;
+    background-color: #D7CEc7;
     border-radius: 10px;
-    height: 30%;
+    height: 25%;
 }
 
 
@@ -67,13 +68,24 @@ body {
     padding-left: 3%;
 }
 
+/*.page-layout {*/
+    /*!*margin: auto;*!*/
+    /*border: 3px solid black;*/
+    /*height: 100%;*/
+/*}*/
 
-.header-div:after {
-    content: "";
-    background-color: black;
-    height: 1px;
-    display: block;
-    top: -1px;
-    position: relative;
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+@media all and (max-width: 1200px) { /* screen size until 1200px */
+    body {
+        font-size: 1.5em; /* 1.5x default size */
+    }
+}
+@media all and (max-width: 1000px) { /* screen size until 1000px */
+    body {
+        font-size: 1.2em; /* 1.2x default size */
+    }
+}
+@media all and (max-width: 500px) { /* screen size until 500px */
+    body {
+        font-size: 0.8em; /* 0.8x default size */
+    }
 }
