@@ -1,0 +1,79 @@
+html {
+    height:100%;
+}
+
+body {
+    background-color: black;
+    height: 100%;
+}
+
+.horizentally-centered {
+    float: none;
+    margin:auto;
+}
+
+.vertically-centered {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header-div {
+    height: 10%;
+    background-color: #5e5e5e;
+    /*border-bottom: 3px solid red;*/
+    /*border-top-left-radius: 30px;*/
+    /*border-top-right-radius: 30px;*/
+    /*margin-top: 0.2%;*/
+}
+/* main-div includes second row in the page (which consists of upload drag'n drop box + explanation box*/
+.main-div {
+    height: 60%;
+}
+
+.explanation-box {
+    background-color: darksalmon;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.upload-box {
+    background-color: #2e6da4;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.selection-menu {
+    background-color: #c7254e;
+    border-radius: 10px;
+    height: 30%;
+}
+
+
+#header {
+    font-family: Chalkboard;
+    color: white;
+    font-weight: bold;
+    padding-left: 1.5%;
+    margin: 0;
+    margin-top:0.1%;
+}
+
+#subtitle {
+    font-family: monospace;
+    font-size: medium;
+    color: white;
+    font-style: oblique;
+    padding-left: 3%;
+}
+
+
+.header-div:after {
+    content: "";
+    background-color: black;
+    height: 1px;
+    display: block;
+    top: -1px;
+    position: relative;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+}
