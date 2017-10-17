@@ -20,7 +20,7 @@ body {
 }
 
 .header-div {
-    height: 10%;
+    height: 12%;
     background-color: #76323F;
     vertical-align: middle;
     border-bottom-left-radius: 10px;
@@ -32,10 +32,12 @@ body {
 }
 
 .explanation-box {
-    background-color: #565656;
-    border-radius: 10px;
-    border-top-left-radius: 0px;
-    height: 100%;
+    background-color: #f4e6de;
+    border-radius: 1px;
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: 90%;
 }
 
 .upload-box {
@@ -45,7 +47,7 @@ body {
 }
 
 .selection-menu {
-    background-color: #D7CEc7;
+    background-color: #D7CEa0;
     border-radius: 10px;
     height: 25%;
 }
@@ -64,6 +66,14 @@ body {
     font-family: monospace;
     font-size: medium;
     color: white;
+    font-style: oblique;
+    padding-left: 3%;
+}
+
+#comment {
+    font-family: monospace;
+    font-size: medium;
+    color: black;
     font-style: oblique;
     padding-left: 3%;
 }
