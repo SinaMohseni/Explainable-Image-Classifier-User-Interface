@@ -16,10 +16,9 @@ var svg = d3.select("#explanation_box").append("svg"),
 	// svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	
-var width = +svg.attr("width") - margin.left - margin.right ,
-    height = +svg.attr("height") - margin.top - margin.bottom,    
-	chart_svg = svg.append("g").attr("class","svg_chart")
-					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var width = 600 - margin.left - margin.right;  // +svg.attr("width")
+var height = 400 - margin.top - margin.bottom;     // +svg.attr("height")
+var	chart_svg = svg.append("g").attr("class","svg_chart").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	var clearance = margin.left + margin.right
 
@@ -37,11 +36,29 @@ var width = +svg.attr("width") - margin.left - margin.right ,
 
 	chart_svg.append('text')
 			  .text("Instance Explanation:")
+			  .attr("class", "text_title")
 			  .attr('dy','0.35em')
-			  .attr('transform', 'translate(' + (width/20 + margin.left) + ','+ (height/20 + margin.top)+')')
+			  .attr('transform', 'translate(' + (width + margin.left) + ','+ (height/20 + margin.top)+')')
+
+
+	
+	var img = chart_svg.selectAll("image_exp").data([0]);  
+            
+            img.enter()
+                .append("svg:image")
+                .attr("class", "image_exp")
+                .attr("xlink:href", "./data/result1/input.png")
+                .attr("x", "60")
+                .attr("y", "60")
+                .attr("width", "400")
+                .attr("height", "400");
+
+        
 
 updateWindow()
+//document.getElementById('image_exp').ondragstart = function() { return false; };
 readData();
+
 
 function readData(){
 
@@ -54,14 +71,23 @@ function updateWindow(){
 		clientHeight = document.getElementById('explanation_box').clientHeight;
 		clientWidth = document.getElementById('explanation_box').clientWidth;
 		
+		//console.log(clientHeight, clientWidth)
 
 		width = clientWidth;
 		height = clientHeight; 
 
 		svg.attr("width", clientWidth);
 		svg.attr("height", clientHeight);
+		
+		chart_svg.selectAll(".text_title").attr('transform', 'translate(' + (clientWidth/2) + ','+ (height/20)+')');
+		///.attr("width",).attr("hight",);
 
-		chart_svg.selectAll(".page_frame").attr("width", clientWidth - clearance - margin.left - margin.right);
-		chart_svg.selectAll(".page_frame").attr("height", clientHeight- clearance);
+		chart_svg.selectAll(".page_frame").attr("width", clientWidth - clearance - margin.left - margin.right)
+		.attr("height", clientHeight- clearance); 
+
+		chart_svg.selectAll(".image_exp").attr("x", 9*clientWidth/16).attr("y", (2*clientHeight/20))
+								.attr("width", (clientWidth/3))
+								.attr("height", (9*clientHeight/12));		
+
 	}
 	
