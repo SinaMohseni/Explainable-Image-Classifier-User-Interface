@@ -84,6 +84,61 @@ body {
     /*height: 100%;*/
 /*}*/
 
+/* style for the Horizontal image scroll bar */
+
+#gallerycontainer {
+  position: relative;
+  height: 189px;
+  width: 95%;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+#gallery {
+  float: left;           /* makes it shrink-wrap all the floating divs inside */
+  margin-right: -30000px; /* allows the width expanding beyond parent edge to give adjacent space *//*N.B. the limit in Opera is a total scroll width of 32778px */
+  position: absolute;
+  z-index: 1;
+}
+
+#gallery a {
+  float: left;
+  width: 219px;
+  height: 165px;
+  margin-right: 5px;
+}
+
+	/* Circular shape for images */
+
+	#gallery .curve { 
+	  width: 33%; height: auto;
+	  min-width: 150px;
+	  float: left;
+	  margin-right:2rem; 
+	  border-radius: 50%;
+	  -webkit-shape-outside:circle();
+	  shape-outside:circle();
+	}
+	/* End of Circular shape for images */
+
+
+/* end of Horizontal image scroll bar */	
+
+/* style for the holder */
+#holder {width:250px;height:250px;
+ border:1px solid #eee;
+     box-shadow:5px 5px 5px #ccc;
+     margin:30px;
+     font: 1.5em verdana ;}
+
+
+#holder img {
+	height:100%;
+	width:100%;
+{
+
+/* end of holder style */
+
 @media all and (max-width: 1200px) { /* screen size until 1200px */
     body {
         font-size: 1.5em; /* 1.5x default size */

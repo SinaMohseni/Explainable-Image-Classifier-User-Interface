@@ -91,3 +91,28 @@ function updateWindow(){
 
 	}
 	
+/* Scripts for the drag and drop logic */
+
+function drag(evt)
+{
+  evt.dataTransfer.setData("text",evt.target.id);// to access DataTranfer interface
+}
+
+
+function enableDrop(evt)
+{
+  evt.preventDefault();// to allow elements to be dropped at destination
+}
+ 
+
+function drop(evt)
+{
+	var child = document.getElementById("holder");
+	child.innerHTML = '';
+
+	evt.preventDefault();
+	var dragged_item=evt.dataTransfer.getData("text");
+	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
+}  
+
+/* end of drag and drop logic */
