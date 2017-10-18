@@ -1,3 +1,4 @@
+var imgIndex = '';
 
 var w_size = window,
     d_size = document,
@@ -103,7 +104,7 @@ function enableDrop(evt)
 {
   evt.preventDefault();// to allow elements to be dropped at destination
 }
- 
+
 
 function drop(evt)
 {
@@ -112,6 +113,7 @@ function drop(evt)
 
 	evt.preventDefault();
 	var dragged_item=evt.dataTransfer.getData("text");
+	imgIndex = dragged_item;
 	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
 }  
 
