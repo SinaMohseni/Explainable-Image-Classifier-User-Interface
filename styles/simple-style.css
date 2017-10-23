@@ -40,6 +40,24 @@ body {
     height: 90%;
 }
 
+.undo{
+  float: right;
+}
+
+.clear{
+  float: right;
+}
+
+.img_box {
+    background-color: #ffffde;
+    border-radius: 1px;
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: 50%;
+    float: right;
+}
+
 .upload-box {
     background-color: #D7CEc7;
     border-radius: 10px;
