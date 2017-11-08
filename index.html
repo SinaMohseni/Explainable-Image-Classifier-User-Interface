@@ -5,18 +5,15 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />		
 	<link rel="stylesheet" href="./styles/simple-style.css">
 	<link rel="stylesheet" href="styles/bootstrap.css">
-<!--	<script src="./libraries/d3.js"></script>-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
-
-	<script src="./scripts/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
 	<script src="./libraries/jquery-3.2.1.min.js"></script>
 	<script src="./libraries/bootstrap.js"></script>
+	<script src="./scripts/main.js"></script>
 <!--	<script src="https://d3js.org/d3.v4.min.js"></script>-->
 
 </head>
 
 <body>
-	<!--<div class="page-layout col-md-11">-->
 		<div class="row header-div">
 			<h1 id="header">
 				Explainable Image Classifier
@@ -32,19 +29,9 @@
 			
 			<br>
 
-<!--
-            <div id='palette'>
-                  <button id='undo'>Undo</button>
-                  <button id='clear'>Clear</button>
-                    <svg width='240' height='20'><g></g></svg>
+            <div class="col-md-2 upload-box" ondrop="drop(event)" ondragover="enableDrop(event)" id="holder">
+            Upload here
             </div>
-                <br>
--->
-<!--			<svg id="explanation_box" class="col-md-7 explanation-box"> </svg>   width="100%" height="300px" style="border: 2px solid gray;" -->
-            
-                        <div class="col-md-2 upload-box" ondrop="drop(event)" ondragover="enableDrop(event)" id="holder">
-                        Upload here
-			            </div>
 
             
             <div class="col-md-7 explanation-box" id="explanation_box">
@@ -52,16 +39,20 @@
              
             
              <br>   
-            <svg class="img_box" id="img_box">
             
+            <svg id="img_box" class="img_box" width="0px" height="0px">
+				<image id= "img_exp" class="img_exp" width="100%" height="100%" xlink:href=""/>
+			</svg>  
             
-                
             </svg>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <div id='palette'>
-                  <button id='undo' style="vertical-align: bottom">Undo</button>
+            	<button id='undo' style="vertical-align: bottom">Undo</button>
                   <button id='clear' style="vertical-align: bottom">Clear</button>
-                    <svg width='240' height='20'><g></g></svg>
+                  Colors:
+                  <svg width='50' height='20'><g></g></svg>
+				  <input type="checkbox" id="fillarea" name="fillarea">Fill
+
             </div> 
             
             </div>

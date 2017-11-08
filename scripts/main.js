@@ -1,5 +1,5 @@
 var imgIndex = '';
-
+var fill_checkbox = 0
 var w_size = window,
     d_size = document,
     e_size = d_size.documentElement,
@@ -16,7 +16,22 @@ d3.select(window).on('resize.updatesvg', updateWindow);
 //	svg.attr("height", "400");
 	// svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
+  fill_area = d3.selectAll("input[name=fillarea]")          // Check box for cutting the tails
+      .style("margin", "0px 10px 0px " + margin.left + "px")
+      .style("padding", "0px 0px")
+      .attr("position", "relative")
+      .on("change", function() {
+                        if (this.checked) {
+                          // highlighter.selectAll(".line").attr("fill", "red");   
+                          fill_checkbox = 1;
+                          // path.attr("fill", "red");  
+                        }else{
+                          fill_checkbox = 0;
+                        // highlighter.selectAll(".line").attr("fill", "none");   
+                          // path.attr("fill", "none");  
+                        }
+                    }
+                       );
 
 	
 var width = 600 - margin.left - margin.right;  // +svg.attr("width")
@@ -71,8 +86,44 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
     .on("drag", dragged)
     .on("dragend", dragended));
 
+  var explanationBox = d3.select("#explanation_box")
 
-    var explanationBox = d3.select("#explanation_box")
+    d3.selection.prototype.moveToBack = function() {
+        return this.each(function() {
+            var firstChild = this.parentNode.firstChild;
+            if (firstChild) {
+                this.parentNode.insertBefore(this, firstChild);
+            }
+        });
+    };
+  
+  d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+      this.parentNode.appendChild(this);
+    });
+  };
+
+  // explanationBox.append("g").append('image')  //selectAll(".pattIcon") .data(makeData2).enter()
+  //       // .attr("class", "exp")
+  //       .attr('xlink:href',"./data/result1/input.png") 
+  //       .attr('height', 100)
+  //       .attr('width', 100)
+  //       .attr("x", 100)
+  //       .attr("y", 100);
+  //     console.log("done")
+
+// d3.xml("./data/result1/input.png").mimeType("image/svg+xml").get(function(error, xml) {
+//        if (error) throw error;
+//        // var svgElem = highlighter.xMarker.node().appendChild(xml.documentElement);
+//        d3.select("#explanation_box")
+//           .attr("height", 100)
+//           .attr("width", 100)
+//           .attr("preserveAspectRatio", "xMinYMid meet")
+//           .attr("transformOrigin", "left")
+//           .style("text-align", "left")
+//           .style("margin", 0);
+//     });
+
 
 	var page_frame = explanationBox.append("g").append("rect").attr("class","page_frame")
 					.attr("x", margin.left)
@@ -82,7 +133,7 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
 					.attr("width", width )
 					.attr("height", height)
 					.attr("fill", "gray")
-					.style("fill-opacity",0.05)
+					.style("fill-opacity",0)
 					.style("stroke","gray")
 					.style("stroke-opacity",1);
 
@@ -96,16 +147,18 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
 function dragstarted() {
   path = highlighter.append("path").datum([]).attr("class", "line")
   			.attr({
-        	"fill": "none",
-          "stroke": "lightblue",
-          "stroke-width": 25 + "px",
+
+          "stroke": "red",
+          "stroke-width": 15 + "px",
           "stroke-linejoin": "round"
-        });
+        })
+        .attr("fill", function(){if (fill_checkbox == 1) return "red"; else return "none"; }); 
 }
 
 function dragged() {
   path.datum().push(d3.mouse(this));
   path.attr("d", area);
+  
 }
 
 function dragended() {
@@ -129,8 +182,8 @@ d3.select('#palette')
   .selectAll('rect')
     .data(colorAr)
   .enter().append('rect')
-    .attr('width', 20)
-    .attr('height',20)
+    .attr('width', 10)
+    .attr('height',10)
     .attr('x', function(d,i){
       return 22 * i;
     })
@@ -147,7 +200,6 @@ d3.select('#palette')
   }
 
 //--------------------------------------------------------
-//document.getElementById('image_exp').ondragstart = function() { return false; };
 readData();
 
 
@@ -167,11 +219,10 @@ function updateWindow(){
 		width = clientWidth;
 		height = clientHeight; 
 
-		svg.attr("width", clientWidth);
-		svg.attr("height", clientHeight);
+		explanationBox.attr("width", clientWidth);
+		explanationBox.attr("height", clientHeight);
 		
 		chart_svg.selectAll(".text_title").attr('transform', 'translate(' + (clientWidth/2) + ','+ (height/20)+')');
-		///.attr("width",).attr("hight",);
 
 		chart_svg.selectAll(".page_frame").attr("width", clientWidth - clearance - margin.left - margin.right)
 		.attr("height", clientHeight- clearance); 
@@ -196,8 +247,7 @@ function enableDrop(evt)
 }
 
 
-function drop(evt)
-{
+function drop(evt){
 	var child = document.getElementById("holder");
 	child.innerHTML = '';
 
@@ -205,6 +255,23 @@ function drop(evt)
 	var dragged_item=evt.dataTransfer.getData("text");
 	imgIndex = dragged_item;
 	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
+
+  new_exp = "./data/result"+imgIndex+ "/input.png"
+  var this_img = new Image();  
+
+  this_img.src = new_exp
+  $(".img_exp").attr("xlink:href",new_exp);
+
+
+  this_img.onload = function(){
+            $(".img_box").attr("height",this.height+"px");
+            $(".img_box").attr("width",this.width+"px");  
+            }
+  
+
+
+  console.log("dragged image: ",imgIndex)
+
 }  
 
 /* end of drag and drop logic */
