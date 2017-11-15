@@ -7,14 +7,7 @@ var w_size = window,
 	
 d3.select(window).on('resize.updatesvg', updateWindow);
 
-//var colors = d3.scaleOrdinal(d3.schemeCategory10); 
-
-//var svg = d3.select("#explanation_box").append("svg"),
     margin = {top: 5, right: 25, bottom: 5, left: 5};
-//	
-//	svg.attr("width", "600");
-//	svg.attr("height", "400");
-	// svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   fill_area = d3.selectAll("input[name=fillarea]")          // Check box for cutting the tails
       .style("margin", "0px 10px 0px " + margin.left + "px")
@@ -22,13 +15,9 @@ d3.select(window).on('resize.updatesvg', updateWindow);
       .attr("position", "relative")
       .on("change", function() {
                         if (this.checked) {
-                          // highlighter.selectAll(".line").attr("fill", "red");   
                           fill_checkbox = 1;
-                          // path.attr("fill", "red");  
                         }else{
                           fill_checkbox = 0;
-                        // highlighter.selectAll(".line").attr("fill", "none");   
-                          // path.attr("fill", "none");  
                         }
                     }
                        );
@@ -39,32 +28,6 @@ var height = 400 - margin.top - margin.bottom;     // +svg.attr("height")
 //var	chart_svg = svg.append("g").attr("class","svg_chart").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	var clearance = margin.left + margin.right
-
-
-
-
-	
-//	var img = chart_svg.selectAll("image_exp").data([0]);  
-//            
-//            img.enter()
-//                .append("svg:image")
-//                .attr("class", "image_exp")
-//                .attr("xlink:href", "./data/result1/input.png")
-//                .attr("x", "60")
-//                .attr("y", "60")
-//                .attr("width", "400")
-//                .attr("height", "400");
-
-//    var test = d3.select("#explanation_box").append("svg"),
-//    margin = {top: 5, right: 25, bottom: 5, left: 5};
-//	
-//	test.attr("width", "600");
-//	test.attr("height", "400");
-//    test.attr("fill","black")
-    
-
-//updateWindow()
-
 
 
 // --------------------------------------------------------------------------------
@@ -103,27 +66,6 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
     });
   };
 
-  // explanationBox.append("g").append('image')  //selectAll(".pattIcon") .data(makeData2).enter()
-  //       // .attr("class", "exp")
-  //       .attr('xlink:href',"./data/result1/input.png") 
-  //       .attr('height', 100)
-  //       .attr('width', 100)
-  //       .attr("x", 100)
-  //       .attr("y", 100);
-  //     console.log("done")
-
-// d3.xml("./data/result1/input.png").mimeType("image/svg+xml").get(function(error, xml) {
-//        if (error) throw error;
-//        // var svgElem = highlighter.xMarker.node().appendChild(xml.documentElement);
-//        d3.select("#explanation_box")
-//           .attr("height", 100)
-//           .attr("width", 100)
-//           .attr("preserveAspectRatio", "xMinYMid meet")
-//           .attr("transformOrigin", "left")
-//           .style("text-align", "left")
-//           .style("margin", 0);
-//     });
-
 
 	var page_frame = explanationBox.append("g").append("rect").attr("class","page_frame")
 					.attr("x", margin.left)
@@ -148,7 +90,8 @@ function dragstarted() {
   path = highlighter.append("path").datum([]).attr("class", "line")
   			.attr({
 
-          "stroke": "red",
+          "stroke": "yellow",
+          "opacity": 0.5,
           "stroke-width": 15 + "px",
           "stroke-linejoin": "round"
         })
@@ -256,7 +199,9 @@ function drop(evt){
 	imgIndex = dragged_item;
 	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
 
-  new_exp = "./data/result"+imgIndex+ "/input.png"
+  d3.select('path.line').remove();
+  
+  new_exp = "./data/result"+imgIndex+ "/output.jpg"
   var this_img = new Image();  
 
   this_img.src = new_exp
@@ -264,8 +209,8 @@ function drop(evt){
 
 
   this_img.onload = function(){
-            $(".img_box").attr("height",this.height+"px");
-            $(".img_box").attr("width",this.width+"px");  
+            $(".img_box").attr("height",(this.height*1.5)+"px");
+            $(".img_box").attr("width",(this.width*1.5)+"px");  
             }
   
 
