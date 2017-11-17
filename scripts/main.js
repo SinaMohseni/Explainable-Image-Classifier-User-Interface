@@ -85,9 +85,10 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
 //			  .attr('dy','0.35em')
 //			  .attr('transform', 'translate(' + (width + margin.left) + ','+ (height/20 + margin.top)+')')
 
-
+var ct = 0;
+var str = "line"
 function dragstarted() {
-  path = highlighter.append("path").datum([]).attr("class", "line")
+  path = highlighter.append("path").datum([]).attr("id", str.concat(ct)).attr("class","line")
   			.attr({
 
           "stroke": "yellow",
@@ -96,6 +97,7 @@ function dragstarted() {
           "stroke-linejoin": "round"
         })
         .attr("fill", function(){if (fill_checkbox == 1) return "red"; else return "none"; }); 
+        ct++;
 }
 
 function dragged() {
@@ -109,11 +111,13 @@ function dragended() {
 }
     
 d3.select('#undo').on('click', function(){
-  d3.select('path.line').remove();
+  ct--;
+  d3.select('path#'+str.concat(ct)).remove();
 });
 
 d3.select('#clear').on('click', function(){
   d3.selectAll('path.line').remove();
+  ct =0;
 });
     
 var colorScale = d3.scale.category10(),
@@ -200,6 +204,7 @@ function drop(evt){
 	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
 
   d3.select('path.line').remove();
+  ct = 0;
   
   new_exp = "./data/result"+imgIndex+ "/output.jpg"
   var this_img = new Image();  
