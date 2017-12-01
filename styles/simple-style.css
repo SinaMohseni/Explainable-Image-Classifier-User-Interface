@@ -152,7 +152,12 @@ body {
 #holder img {
 	height:100%;
 	width:100%;
-{
+}
+
+#img_exp:hover {
+  cursor: crosshair;
+}
+
 
 /* end of holder style */
 
