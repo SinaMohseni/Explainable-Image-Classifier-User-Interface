@@ -1,3 +1,4 @@
+highligh_data = []
 var inkColor = "#1f77b4"
 var imgIndex = '';
 var fill_checkbox = 1
@@ -33,11 +34,22 @@ var clearance = margin.left + margin.right
 
 var path;
 var color = "lightblue"
-
+x_old = 0
+y_old = 0
 
 var area = d3.svg.line()
-  .x(function(d) { return d[0]; })
-  .y(function(d) { return d[1]; })
+  .x(function(d) {
+      if ( (Math.abs(d[0] - x_old) > 1) | (Math.abs(d[1] - y_old) > 1) ){
+        x_old = d[0];
+        y_old = d[1];
+        if (inkColor == "#1f77b4"){
+          highligh_data.push([d[0],d[1],0,0]);
+        } else{
+          highligh_data.push([0,0,d[0],d[1]]);
+        }
+      }
+      return d[0]; })
+  .y(function(d) { return d[1];})
   .tension(0)
   .interpolate("basis");
 
@@ -82,8 +94,7 @@ function dragstarted() {
 
 function dragged() {
   path.datum().push(d3.mouse(this));
-  path.attr("d", area);
-  
+  path.attr("d", area); 
 }
 
 function dragended() {
@@ -135,11 +146,11 @@ function readData(){
 }
 
 function saveIt(){  
-    highligh_data = []
+    
     var csvContent = "data:text/csv;charset=utf-8,";
     highligh_data.forEach(function(infoArray, index){   
          dataString = infoArray.join(",");
-         csvContent += index < data2.length ? dataString+ "\n" : dataString;
+         csvContent += index < highligh_data.length ? dataString+ "\n" : dataString;
     });
     
     var encodedUri = encodeURI(csvContent);
@@ -149,6 +160,7 @@ function saveIt(){
     document.body.appendChild(link);  
 
     link.click(); 
+    highligh_data = []
 
 }
 
@@ -164,8 +176,6 @@ function updateWindow(){
 		explanationBox.attr("height", clientHeight);
 		
 	}
-	
-/* Scripts for the drag and drop logic */
 
 function drag(evt)
 {
@@ -203,7 +213,7 @@ function drop(evt){
             $(".img_box").attr("height",(this.height*1.5)+"px");
             $(".img_box").attr("width",(this.width*1.5)+"px");  
             }
-  img_label = ["Baloon","Zebra","Elephent","Scorpio","Kangroo","Crab","Bird","Wild Cat","Panda","Cat"]
+  img_label = ["Balloon","Zebra","Elephant","Scorpion","Kangaroo","Crab","Bird","Wild Cat","Panda","Cat"]
 
   explanationBox.append("text").attr("class", "label")
             .text("This is a "+img_label[imgIndex-1]+".")
