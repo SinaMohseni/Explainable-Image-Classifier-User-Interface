@@ -1,5 +1,6 @@
+var inkColor = "#1f77b4"
 var imgIndex = '';
-var fill_checkbox = 0
+var fill_checkbox = 1
 var w_size = window,
     d_size = document,
     e_size = d_size.documentElement,
@@ -13,6 +14,7 @@ d3.select(window).on('resize.updatesvg', updateWindow);
       .style("margin", "0px 10px 0px " + margin.left + "px")
       .style("padding", "0px 0px")
       .attr("position", "relative")
+      .attr("checked", true)
       .on("change", function() {
                         if (this.checked) {
                           fill_checkbox = 1;
@@ -22,13 +24,10 @@ d3.select(window).on('resize.updatesvg', updateWindow);
                     }
                        );
 
-	
-var width = 600 - margin.left - margin.right;  // +svg.attr("width")
-var height = 400 - margin.top - margin.bottom;     // +svg.attr("height")
-//var	chart_svg = svg.append("g").attr("class","svg_chart").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var width = 600 - margin.left - margin.right;
+var height = 400 - margin.top - margin.bottom;
 
-	var clearance = margin.left + margin.right
-
+var clearance = margin.left + margin.right
 
 // --------------------------------------------------------------------------------
 
@@ -42,14 +41,15 @@ var area = d3.svg.line()
   .tension(0)
   .interpolate("basis");
 
-//var svg = d3.select("#canvas")
-var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_svg").selectAll("class","highlighter")
+var highlighter = d3.select("#img_box")
 	.call(d3.behavior.drag()
 		.on("dragstart", dragstarted)
     .on("drag", dragged)
     .on("dragend", dragended));
 
-  var explanationBox = d3.select("#explanation_box")
+  var explanationBox = d3.select("#explanation_box").append("svg").attr("width", width).attr("height", height);
+
+  updateWindow();  
 
     d3.selection.prototype.moveToBack = function() {
         return this.each(function() {
@@ -66,37 +66,17 @@ var highlighter = d3.select("#img_box") //var highlighter = d3.select(".chart_sv
     });
   };
 
-
-	var page_frame = explanationBox.append("g").append("rect").attr("class","page_frame")
-					.attr("x", margin.left)
-					.attr("y", margin.top)
-					.attr("rx", 10)
-					.attr("ry", 10)
-					.attr("width", width )
-					.attr("height", height)
-					.attr("fill", "gray")
-					.style("fill-opacity",0)
-					.style("stroke","gray")
-					.style("stroke-opacity",1);
-
-//	explanationBox.append('text')
-//			  .text("Instance Explanation:")
-//			  .attr("class", "text_title")
-//			  .attr('dy','0.35em')
-//			  .attr('transform', 'translate(' + (width + margin.left) + ','+ (height/20 + margin.top)+')')
-
 var ct = 0;
 var str = "line"
 function dragstarted() {
   path = highlighter.append("path").datum([]).attr("id", str.concat(ct)).attr("class","line")
   			.attr({
-
-          "stroke": "yellow",
-          "opacity": 0.5,
+          "stroke": inkColor,
+          "opacity": 0.7,
           "stroke-width": 15 + "px",
           "stroke-linejoin": "round"
         })
-        .attr("fill", function(){if (fill_checkbox == 1) return "red"; else return "none"; }); 
+        .attr("fill", function(){if (fill_checkbox == 1) return inkColor; else return "none"; }); 
         ct++;
 }
 
@@ -121,7 +101,6 @@ d3.select('#clear').on('click', function(){
 });
     
 var colorScale = d3.scale.category10(),
-//    colorAr = [0,1,2,3,4,5,6,7,8,9,10];
     colorAr = [0,1]
 
 d3.select('#palette')
@@ -144,6 +123,7 @@ d3.select('#palette')
 
   function changeColor(c){
     color = c;
+    inkColor = color
   }
 
 //--------------------------------------------------------
@@ -154,30 +134,35 @@ function readData(){
 
 }
 
+function saveIt(){  
+    highligh_data = []
+    var csvContent = "data:text/csv;charset=utf-8,";
+    highligh_data.forEach(function(infoArray, index){   
+         dataString = infoArray.join(",");
+         csvContent += index < data2.length ? dataString+ "\n" : dataString;
+    });
+    
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "Retraining_data.csv");
+    document.body.appendChild(link);  
 
+    link.click(); 
+
+}
 
 function updateWindow(){
 							 
-		clientHeight = document.getElementById('explanation_box').clientHeight;
+		clientHeight = document.getElementById('explanation_box').clientHeight;  // explanation_box
 		clientWidth = document.getElementById('explanation_box').clientWidth;
 		
-		//console.log(clientHeight, clientWidth)
-
 		width = clientWidth;
 		height = clientHeight; 
 
 		explanationBox.attr("width", clientWidth);
 		explanationBox.attr("height", clientHeight);
 		
-		chart_svg.selectAll(".text_title").attr('transform', 'translate(' + (clientWidth/2) + ','+ (height/20)+')');
-
-		chart_svg.selectAll(".page_frame").attr("width", clientWidth - clearance - margin.left - margin.right)
-		.attr("height", clientHeight- clearance); 
-
-		chart_svg.selectAll(".image_exp").attr("x", 9*clientWidth/16).attr("y", (2*clientHeight/20))
-								.attr("width", (clientWidth/3))
-								.attr("height", (9*clientHeight/12));		
-
 	}
 	
 /* Scripts for the drag and drop logic */
@@ -203,7 +188,8 @@ function drop(evt){
 	imgIndex = dragged_item;
 	child.appendChild(document.getElementById(dragged_item).cloneNode(true));// add dragged items
 
-  d3.select('path.line').remove();
+  d3.selectAll('.label').remove();
+    d3.selectAll('path.line').remove();
   ct = 0;
   
   new_exp = "./data/result"+imgIndex+ "/output.jpg"
@@ -217,11 +203,13 @@ function drop(evt){
             $(".img_box").attr("height",(this.height*1.5)+"px");
             $(".img_box").attr("width",(this.width*1.5)+"px");  
             }
-  
+  img_label = ["Baloon","Zebra","Elephent","Scorpio","Kangroo","Crab","Bird","Wild Cat","Panda","Cat"]
 
-
-  console.log("dragged image: ",imgIndex)
-
+  explanationBox.append("text").attr("class", "label")
+            .text("This is a "+img_label[imgIndex-1]+".")
+            .attr("x", 0)
+            .attr("y", 0)
+            .style('fill', 'maroon')
+            .style("font-size", "22px")
+            .attr("transform", "translate(" + width/2 + "," + 100 + ")");
 }  
-
-/* end of drag and drop logic */
