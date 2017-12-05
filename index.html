@@ -2,16 +2,17 @@
 <meta charset="utf-8">
 <head>
 <title>Explainable Image Classifier</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />		
-	<link rel="stylesheet" href="./styles/simple-style.css">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" href="styles/bootstrap.css">
+	<link rel="stylesheet" href="./styles/simple-style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
 	<script src="./libraries/jquery-3.2.1.min.js"></script>
 	<script src="./libraries/bootstrap.js"></script>
 </head>
 
 <body>
-		<div class="row header-div">
+		<!-- 
+<div class="row header-div">
 			<h1 id="header">
 				Explainable Image Classifier
 			</h1>
@@ -19,19 +20,16 @@
 				Explaination for image classification
 			</p>
 		</div>
+ -->
+		<nav class="navbar navbar-light bg-faded">
+		  <h1 class="navbar-brand mb-0">Explainable Image Classifier</h1>
+		</nav>
 		
 		<div class="row main-div">
-			
-			
-			
-			<br>
-
-            <div class="col-md-2 upload-box" ondrop="drop(event)" ondragover="enableDrop(event)" id="holder">
+            <div class="col-md-2 col-md-offset-1 upload-box" ondrop="drop(event)" ondragover="enableDrop(event)" id="holder">
             Upload here
             </div>
-
-            
-            <div class="col-md-7 explanation-box" id="explanation_box">
+            <div class="col-md-8 explanation-box" id="explanation_box">
             <p>Instance Explanation:</p>
              
             
@@ -42,13 +40,12 @@
 			</svg>  
             
             </svg>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <div id='palette'>
-            	<button id='undo' style="vertical-align: bottom">Undo</button>
-                <button id='clear' style="vertical-align: bottom">Clear</button>
-                <input type="button" value="Download" style="vertical-align: bottom" onclick="saveIt()"></button>
-                  Colors:
-                  <svg width='50' height='20'><g></g></svg>
+            <div id='palette' class="btn-group" >
+            	<button class="btn btn-md btn-default" id='undo' style="vertical-align: bottom">Undo</button>
+                <button class="btn btn-md btn-default" id='clear' style="vertical-align: bottom">Clear</button>
+                <button class="btn btn-md btn-default"type="button" value="Download" onclick="saveIt()">Download</button>
+                <input type="color" class="btn btn-default btn-sm" onChange="changeColor(this)">
+                  <!-- <svg width='50' height='20'><g></g></svg> -->
 				  <input type="checkbox" id="fillarea" name="fillarea">Fill
 
             </div> 
@@ -60,17 +57,17 @@
 		<div class="row selection-menu">
 			<div id="gallerycontainer">
 				<div id="gallery">
-					<a href="#"><img id="1" src="data/result1/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="2" src="data/result2/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="3" src="data/result3/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="4" src="data/result4/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="5" src="data/result5/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="6" src="data/result6/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="7" src="data/result7/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="8" src="data/result8/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="9" src="data/result9/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-					<a href="#"><img id="10" src="data/result10/input.png" alt="" class="curve" draggable="true" ondragstart="drag(event)"/></a>
-			  </div>
+					<image id="1" src="data/result1/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="2" src="data/result2/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="3" src="data/result3/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="4" src="data/result4/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="5" src="data/result5/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="6" src="data/result6/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="7" src="data/result7/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="8" src="data/result8/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="9" src="data/result9/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+					<image id="10" src="data/result10/input.png" class="img-responsive img-circle" draggable="true" ondragstart="drag(event)"/>
+				</div>
 			</div>
 		</div>
 	<!--</div>-->

@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Viga');
+
 html {
     height:100%;
+    font-family: Viga;
 }
 
 body {
-    background-color: black;
+    background-color: #67266b;
     height: 100%;
     overflow: auto;
+    font-family: Viga;
+    overflow-x: hidden;
 }
 
 .horizontally-centered {
@@ -66,7 +71,7 @@ body {
 .selection-menu {
     background-color: #D7CEa0;
     border-radius: 10px;
-    height: 25%;
+    height: 20%;
 }
 
 
@@ -105,10 +110,11 @@ body {
 
 #gallerycontainer {
   position: relative;
-  height: 189px;
-  width: 95%;
+  height: 100%;
+  width: 90%;
   margin: 0 auto;
   overflow: auto;
+  background-color: blue;
 }
 
 #gallery {
@@ -116,8 +122,13 @@ body {
   margin-right: -30000px; /* allows the width expanding beyond parent edge to give adjacent space *//*N.B. the limit in Opera is a total scroll width of 32778px */
   position: absolute;
   z-index: 1;
-}
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
+}
+	
 #gallery a {
   float: left;
   width: 219px;
@@ -127,15 +138,15 @@ body {
 
 	/* Circular shape for images */
 
-	#gallery .curve { 
-	  width: 33%; height: auto;
-	  min-width: 150px;
-	  float: left;
-	  margin-right:2rem; 
-	  border-radius: 50%;
-	  -webkit-shape-outside:circle();
-	  shape-outside:circle();
-	}
+#gallery .curve { 
+  width: 33%; height: auto;
+  min-width: 150px;
+  float: left;
+  margin-right:2rem; 
+  border-radius: 50%;
+  -webkit-shape-outside:circle();
+  shape-outside:circle();
+}
 	/* End of Circular shape for images */
 
 
@@ -144,9 +155,16 @@ body {
 /* style for the holder */
 #holder {width:250px;height:250px;
  border:1px solid #eee;
-     box-shadow:5px 5px 5px #ccc;
-     margin:30px;
-     font: 1.5em verdana ;}
+ margin:30px;
+ display: flex;
+ align-items: center;
+ flex-wrap: wrap;
+ text-align: center;
+ font-size: 30px;
+ color: grey;
+ border-style: dashed;
+ border-color: black;
+ }
 
 
 #holder img {
@@ -175,4 +193,27 @@ body {
     body {
         font-size: 0.8em; /* 0.8x default size */
     }
+}
+
+#gallery img {
+	height: 80%;
+	width: 180px;
+	margin-right: 30px;
+}
+
+.navbar {
+	height: 10%;
+	display: flex;
+	margin-bottom: 0px;
+  	align-items: center;
+  	flex-wrap: wrap;
+  	background-color: #6146b3;
+}
+
+.navbar-brand {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 30px;
+	color: white;
+
 }

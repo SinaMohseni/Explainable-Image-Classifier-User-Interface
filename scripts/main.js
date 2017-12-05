@@ -133,7 +133,7 @@ d3.select('#palette')
     });
 
   function changeColor(c){
-    color = c;
+    color = c.value;
     inkColor = color
   }
 
