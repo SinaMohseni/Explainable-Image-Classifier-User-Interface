@@ -9,6 +9,7 @@ body {
     background-color: #67266b;
     height: 100%;
     overflow: auto;
+    overflow-y: hidden;
     font-family: Viga;
     overflow-x: hidden;
 }
@@ -16,6 +17,13 @@ body {
 .horizontally-centered {
     float: none;
     margin:auto;
+}
+
+.vertical {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
 }
 
 .vertically-centered {
@@ -43,12 +51,11 @@ body {
 .explanation-box {
     background-color: #f4e6de;
     border-radius: 1px;
-    padding-left: 1px;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding:0px;
     height: 90%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    box-shadow: 1px 2px 15px 1px #88999d;
 }
 
 .undo{
@@ -124,7 +131,7 @@ body {
   background-color: #2c9ab4;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-    box-shadow: inset 0px 7px 15px 0px #287a8ecc;
+  box-shadow: inset 0px 7px 15px 0px #287a8ecc;
 }
 
 #gallery {
@@ -229,4 +236,21 @@ body {
 	font-size: 30px;
 	color: white;
 
+}
+
+#explanation-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 30px;
+  padding: 0px;
+}
+
+#img-box {
+	padding: 0px;
+}
+
+.col-md-7.pull-right {
+	height: 100%;
+	padding:0px;
 }

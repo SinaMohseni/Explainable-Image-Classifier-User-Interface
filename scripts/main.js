@@ -215,17 +215,22 @@ function drop(evt){
 		
 
   this_img.onload = function(){
-            $(".img_box").attr("height",(this.height*1.5)+"px");
-            $(".img_box").attr("width",(this.width*1.5)+"px");  
+            $(".img_box").attr("height","100%");
+            $(".img_box").attr("width","100%");  
             }
   img_label = ["Balloon","Zebra","Elephant","Scorpion","Kangaroo","Crab","Bird","Wild Cat","Panda","Cat"]
 
-  explanationBox.append("text").attr("class", "label")
-            .text("This is a "+img_label[imgIndex-1]+".")
-            .attr("x", 0)
-            .attr("y", 0)
-            .style('fill', 'maroon')
-            .style("font-size", "22px")
-            .attr("transform", "translate(" + width/2 + "," + 100 + ")");
-
+  // explanationBox.append("text").attr("class", "label")
+//             .text("This is a "+img_label[imgIndex-1]+".")
+//             .attr("x", 0)
+//             .attr("y", 0)
+//             .style('fill', 'maroon')
+//             .style("font-size", "22px")
+//             .attr("transform", "translate(" + width/2 + "," + 100 + ")");
+//             
+// 	
+	d3.select("#explanation-details").html("");
+	d3.select("#explanation-details").append("h1").html(function() {
+				return "This is a picture of a " + img_label[imgIndex-1] + ".";
+	});
 }
