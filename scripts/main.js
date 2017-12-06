@@ -190,6 +190,7 @@ function enableDrop(evt)
 
 
 function drop(evt){
+    $(".explanation-box").css("visibility", "visible");
 	var child = document.getElementById("holder");
 	child.innerHTML = '';
 
@@ -220,19 +221,29 @@ function drop(evt){
             $(".img_box").attr("height","90%");
             $(".img_box").attr("width","100%");  
             }
-  img_label = ["Balloon","Zebra","Elephant","Scorpion","Kangaroo","Crab","Bird","Wild Cat","Panda","Cat"]
+  img_label = ["Hot Air Balloon","Zebra","Elephant","Scorpion","Kangaroo","Freshwater crab","Sandpiper","Short-haired Cat","Panda","Abyssinian Cat On Tree"]
 
-  // explanationBox.append("text").attr("class", "label")
-//             .text("This is a "+img_label[imgIndex-1]+".")
-//             .attr("x", 0)
-//             .attr("y", 0)
-//             .style('fill', 'maroon')
-//             .style("font-size", "22px")
-//             .attr("transform", "translate(" + width/2 + "," + 100 + ")");
-//             
-// 	
+ //  
+    
 	d3.select("#explanation-details").html("");
 	d3.select("#explanation-details").append("h4").html(function() {
-				return " 'This is a picture of a " + img_label[imgIndex-1] + ".' ";
+				return " Result: " + img_label[imgIndex-1] ;
 	});
+  $('input[type=radio]').prop('checked', false);  
+   
 }
+
+//var flag = 0;
+//$('input[type=radio]').click(function(){
+//    if(flag === 0)
+//    {
+//      $(this).prop('checked', true);              
+//      flag = 1;
+//    }
+//    else if(flag == 1)
+//    {
+//      $(this).prop('checked', false);
+//      flag = 0;        
+//    }
+//
+//});

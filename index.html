@@ -8,17 +8,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
 	<script src="./libraries/jquery-3.2.1.min.js"></script>
 	<script src="./libraries/bootstrap.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 
 <body>
 	
-		<nav class="navbar navbar-light bg-faded">
+		<nav class="navbar navbar-light bg-faded" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 		  <h1 class="navbar-brand mb-0">Explainable Image Classifier</h1>
 		</nav>
 		
 		<div class="row main-div col-md-12">
             <div class="col-md-2 col-md-offset-1 upload-box" ondrop="drop(event)" ondragover="enableDrop(event)" id="holder">
-            Upload here
+            Drag An Image Here To Get Started
             </div>
             <div class="col-md-8 explanation-box" id="explanation_box">
             	<div class="col-md-7 pull-right">
@@ -27,18 +28,49 @@
 					</svg>  
 				</div>
 				<div class="col-md-5 vertical">
-					<div class="col-md-12">
-						<h3> Instance Explanation </h3>
+					<div class="col-md-12" id="heading">
+						<h2> Instance Result and Explanation: </h2>
 					</div>
 					<div id="explanation-details" class="col-md-12"></div>
+                    <div id="rating-details" class="col-md-12">How do you rate this classification?
+                    <div class="stars">
+                      <form action="">
+                          <input class="star star-10" id="star-10" type="radio" name="star"/>
+                        <label class="star star-10" for="star-10"></label>
+                        <input class="star star-9" id="star-9" type="radio" name="star"/>
+                        <label class="star star-9" for="star-9"></label>
+                        <input class="star star-8" id="star-8" type="radio" name="star"/>
+                        <label class="star star-8" for="star-8"></label>
+                        <input class="star star-7" id="star-7" type="radio" name="star"/>
+                        <label class="star star-7" for="star-7"></label>
+                        <input class="star star-6" id="star-6" type="radio" name="star"/>
+                        <label class="star star-6" for="star-6"></label>
+                        <input class="star star-5" id="star-5" type="radio" name="star"/>
+                        <label class="star star-5" for="star-5"></label>
+                        <input class="star star-4" id="star-4" type="radio" name="star"/>
+                        <label class="star star-4" for="star-4"></label>
+                        <input class="star star-3" id="star-3" type="radio" name="star"/>
+                        <label class="star star-2" for="star-3"></label>
+                        <input class="star star-2" id="star-2" type="radio" name="star"/>
+                        <label class="star star-2" for="star-2"></label>
+                        <input class="star star-1" id="star-1" type="radio" name="star"/>
+                        <label class="star star-1" for="star-1"></label>
+                      </form>
+                    </div>
+                        </div>
+
 					<div id='palette' class="btn-group col-md-12">
-						<button class="btn btn-md btn-primary" id='undo' style="vertical-align: bottom">Undo</button>
-						<button class="btn btn-md btn-warning" id='clear' style="vertical-align: bottom">Clear</button>
-						<button class="btn btn-md btn-success"type="button" value="Download" onclick="saveIt()">Download</button>
-						<input type="color" class="btn btn-md btn-default" onChange="changeColor(this)" style="height:34px">
-						<label class="btn btn-default btn-md">
+                        <p id="palette header" style="font-size: 25px;">Annotation Palette:</p>
+                        <label class="btn btn-default btn-lg">
+                        <input type="color" onChange="changeColor(this)">
+                            Palette
+                        </label>
+						<label class="btn btn-default btn-lg">
     						<input type="checkbox" autocomplete="off" id="fillarea" name="fillarea" > Fill
   						</label>
+						<button class="btn btn-lg btn-primary" id='undo' style="vertical-align: bottom">Undo</button>
+						<button class="btn btn-lg btn-warning" id='clear' style="vertical-align: bottom">Clear</button>
+						<button class="btn btn-lg btn-success"type="button" value="Download" onclick="saveIt()">Download</button>
 					</div>
 				</div>
             </div>
