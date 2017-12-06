@@ -207,7 +207,12 @@ function drop(evt){
 
   this_img.src = new_exp
   $(".img_exp").attr("xlink:href",new_exp);
-
+  d3.select("#holder").selectAll("img")
+		.classed("img-circle", false);
+  d3.select("#holder").selectAll("img")
+		.classed("img-rounded", true)
+		.style("height", "90%");
+		
 
   this_img.onload = function(){
             $(".img_box").attr("height",(this.height*1.5)+"px");
@@ -222,4 +227,5 @@ function drop(evt){
             .style('fill', 'maroon')
             .style("font-size", "22px")
             .attr("transform", "translate(" + width/2 + "," + 100 + ")");
-}  
+
+}
