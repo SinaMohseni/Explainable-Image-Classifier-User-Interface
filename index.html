@@ -28,16 +28,17 @@
 				</div>
 				<div class="col-md-5 vertical">
 					<div class="col-md-12">
-						<h1> Instance Explanation </h1>
+						<h3> Instance Explanation </h3>
 					</div>
 					<div id="explanation-details" class="col-md-12"></div>
-					<div id='palette' class="btn-group col-md-12" >
-						<button class="btn btn-md btn-default" id='undo' style="vertical-align: bottom">Undo</button>
-						<button class="btn btn-md btn-default" id='clear' style="vertical-align: bottom">Clear</button>
-						<button class="btn btn-md btn-default"type="button" value="Download" onclick="saveIt()">Download</button>
-						<input type="color" class="btn btn-default btn-sm" onChange="changeColor(this)">
-						  <!-- <svg width='50' height='20'><g></g></svg> -->
-						  <input type="checkbox" id="fillarea" name="fillarea">Fill
+					<div id='palette' class="btn-group col-md-12">
+						<button class="btn btn-md btn-primary" id='undo' style="vertical-align: bottom">Undo</button>
+						<button class="btn btn-md btn-warning" id='clear' style="vertical-align: bottom">Clear</button>
+						<button class="btn btn-md btn-success"type="button" value="Download" onclick="saveIt()">Download</button>
+						<input type="color" class="btn btn-md btn-default" onChange="changeColor(this)" style="height:34px">
+						<label class="btn btn-default btn-md">
+    						<input type="checkbox" autocomplete="off" id="fillarea" name="fillarea" > Fill
+  						</label>
 					</div>
 				</div>
             </div>

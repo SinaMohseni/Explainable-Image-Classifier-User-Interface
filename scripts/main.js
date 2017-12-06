@@ -207,6 +207,8 @@ function drop(evt){
 
   this_img.src = new_exp
   $(".img_exp").attr("xlink:href",new_exp);
+  d3.select("#img_exp")
+  	.style("border-radius", "5px");
   d3.select("#holder").selectAll("img")
 		.classed("img-circle", false);
   d3.select("#holder").selectAll("img")
@@ -215,7 +217,7 @@ function drop(evt){
 		
 
   this_img.onload = function(){
-            $(".img_box").attr("height","100%");
+            $(".img_box").attr("height","90%");
             $(".img_box").attr("width","100%");  
             }
   img_label = ["Balloon","Zebra","Elephant","Scorpion","Kangaroo","Crab","Bird","Wild Cat","Panda","Cat"]
@@ -230,7 +232,7 @@ function drop(evt){
 //             
 // 	
 	d3.select("#explanation-details").html("");
-	d3.select("#explanation-details").append("h1").html(function() {
-				return "This is a picture of a " + img_label[imgIndex-1] + ".";
+	d3.select("#explanation-details").append("h4").html(function() {
+				return " 'This is a picture of a " + img_label[imgIndex-1] + ".' ";
 	});
 }

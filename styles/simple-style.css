@@ -55,7 +55,7 @@ body {
     height: 90%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    box-shadow: 1px 2px 15px 1px #88999d;
+    box-shadow: 1px 2px 15px 1px #67266b66;
 }
 
 .undo{
@@ -170,7 +170,9 @@ body {
 /* end of Horizontal image scroll bar */	
 
 /* style for the holder */
-#holder {width:250px;height:250px;
+#holder {
+width:250px;
+height:250px;
  border:1px solid #eee;
  margin:30px;
  display: flex;
@@ -181,6 +183,7 @@ body {
  color: grey;
  border-style: dashed;
  border-color: black;
+/*  padding-left: 37px; */
  }
 
 
@@ -253,4 +256,20 @@ body {
 .col-md-7.pull-right {
 	height: 100%;
 	padding:0px;
+	margin-top: 18px;
+}
+
+h3 {
+	margin: 0 0 10px;
+}
+
+h4 {
+	font-size: 25px;
+	color: #3613a3;
+	padding: 16px;
+    margin: 0px;
+}
+
+.btn {
+	color: black;
 }
